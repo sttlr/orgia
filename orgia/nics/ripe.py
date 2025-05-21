@@ -23,9 +23,9 @@ class RIPE(Engine):
         r = self._http_request(url, headers={'Accept': 'application/json'})
         return r.json()
 
-    def _search_db_and_get_all_pages(self, query: str, country: str=None) -> list:
+    def _search_db_and_get_all_pages(self, query: str) -> list:
         query = query.format(org_name=self.org_name)
-        if country:
+        if self.args.country:
             query += ' AND (country:("RU"))'
         
         pages = [self._request_db(query)]
