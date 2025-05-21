@@ -7,9 +7,9 @@ class RIPE(Engine):
     RESULTS_PER_PAGE = 1000
     DB_URL = f'https://apps.db.ripe.net/db-web-ui/api/rest/fulltextsearch/select?facet=false&format=xml&hl=true&wt=json&rows={RESULTS_PER_PAGE}'
     ORG_QUERY = '(organisation:("{org_name}") OR descr:("{org_name}") OR e-mail:("{org_name}") OR org-name:("{org_name}") OR remarks:("{org_name}")) AND (object-type:organisation)'
-    INET_QUERY = '(descr:("{org_name}") OR netname:("{org_name}") OR remarks:("{org_name}")) AND (object-type:inetnum)'
-    INET6_QUERY = '(descr:("{org_name}") OR netname:("{org_name}") OR remarks:("{org_name}")) AND (object-type:inet6num)'
-    ASN_QUERY = '(descr:("{org_name}") OR as-name:("{org_name}") OR remarks:("{org_name}")) AND (object-type:aut-num)'
+    INET_QUERY = '(organisation:("{org_name}") OR descr:("{org_name}") OR netname:("{org_name}") OR remarks:("{org_name}")) AND (object-type:inetnum)'
+    INET6_QUERY = '(organisation:("{org_name}") OR descr:("{org_name}") OR netname:("{org_name}") OR remarks:("{org_name}")) AND (object-type:inet6num)'
+    ASN_QUERY = '(organisation:("{org_name}") OR descr:("{org_name}") OR as-name:("{org_name}") OR remarks:("{org_name}")) AND (object-type:aut-num)'
     RDAP_URL = 'https://rdap.db.ripe.net'
 
     def __init__(self, org_name: str, args):
