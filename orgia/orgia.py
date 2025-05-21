@@ -125,6 +125,11 @@ def get_args():
         action='store_true'
     )
 
+    parser.add_argument(
+        '--country',
+        help='filter results by country'
+    )
+
     args = parser.parse_args()
 
     if not any((
