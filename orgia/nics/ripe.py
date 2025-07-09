@@ -6,7 +6,7 @@ class RIPE(Engine):
     DELAY = 0
     RESULTS_PER_PAGE = 1000
     DB_URL = f'https://apps.db.ripe.net/db-web-ui/api/rest/fulltextsearch/select?facet=false&format=xml&hl=true&wt=json&rows={RESULTS_PER_PAGE}'
-    ORG_QUERY = '(descr:("{org_name}") OR e-mail:("{org_name}") OR org-name:("{org_name}") OR remarks:("{org_name}")) AND (object-type:organisation)'
+    ORG_QUERY = '(organisation:("{org_name}") OR descr:("{org_name}") OR e-mail:("{org_name}") OR org-name:("{org_name}") OR remarks:("{org_name}")) AND (object-type:organisation)'
     INET_QUERY = '(descr:("{org_name}") OR netname:("{org_name}") OR remarks:("{org_name}")) AND (object-type:inetnum)'
     INET6_QUERY = '(descr:("{org_name}") OR netname:("{org_name}") OR remarks:("{org_name}")) AND (object-type:inet6num)'
     ASN_QUERY = '(descr:("{org_name}") OR as-name:("{org_name}") OR remarks:("{org_name}")) AND (object-type:aut-num)'
@@ -25,6 +25,9 @@ class RIPE(Engine):
 
     def _search_db_and_get_all_pages(self, query: str) -> list:
         query = query.format(org_name=self.org_name)
+        if self.args.country:
+            query += f' AND (country:("{self.args.country}"))'
+        
         pages = [self._request_db(query)]
 
         num_pages = (pages[0]['result']['numFound'] // self.RESULTS_PER_PAGE) + 1
