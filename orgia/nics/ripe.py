@@ -26,7 +26,7 @@ class RIPE(Engine):
     def _search_db_and_get_all_pages(self, query: str) -> list:
         query = query.format(org_name=self.org_name)
         if self.args.country:
-            query += ' AND (country:("RU"))'
+            query += f' AND (country:("{self.args.country}"))'
         
         pages = [self._request_db(query)]
 
