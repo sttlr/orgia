@@ -112,9 +112,9 @@ orgia --org ORGNAME --asns --silent --jsonl | jq
 ```
 
 #### Use config
-Whitelist or blacklist handles, names, emails in output.
+Whitelist or blacklist handles, names, and emails in output.
 
-When checking, input is lowercased and ```in``` is used for comparison (checks if a config string ```in``` a test string).
+RDAP may omit an object's name; name-based filters skip objects with no name. When checking names, input is lowercased and ```in``` is used for comparison (checks if a config string ```in``` a test string).
 
 You can create a config file and pass it via ```--config``` option:
 ```sh

@@ -200,10 +200,10 @@ class Engine(RDAP):
                 if handle_or_dict['handle'] in self.config.get(type, {}).get(f'{color}list-handles', []):
                     return True
                 for name in self.config.get(type, {}).get(f'{color}list-names', []):
-                    if name in handle_or_dict['name']:
+                    if name and name in (handle_or_dict.get('name') or []):
                         return True
                 for email in self.config.get(type, {}).get(f'{color}list-emails', []):
-                    if email in handle_or_dict.get('support_emails', []):
+                    if email and email in (handle_or_dict.get('support_emails') or []):
                         return True
         
         return False
